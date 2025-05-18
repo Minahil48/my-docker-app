@@ -4,7 +4,7 @@ services:
   backend:
     image: minahil48/note-app-backend
     ports:
-      - "3000:3000"
+      - "3001:3000"      # Use 3001 on host, container still 3000
     depends_on:
       - mongo
     environment:
@@ -13,7 +13,7 @@ services:
   frontend:
     image: minahil48/note-app-frontend
     ports:
-      - "5173:5173"
+      - "8080:5173"     # Use 8080 on host for frontend
     depends_on:
       - backend
 
