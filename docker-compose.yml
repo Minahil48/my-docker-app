@@ -1,10 +1,8 @@
-version: '3.9'
-
 services:
   mongo:
     image: mongo
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
@@ -12,7 +10,7 @@ services:
     build:
       context: ./backend
     ports:
-      - 3000:3000
+      - "3001:3000"  # Host port 3001 maps to container 3000
     depends_on:
       - mongo
     environment:
@@ -22,7 +20,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - 8080:5173
+      - "8080:5173"  # Host port 8080 maps to container 5173
     depends_on:
       - backend
 
