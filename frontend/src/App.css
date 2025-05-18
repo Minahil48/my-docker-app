@@ -1,0 +1,32 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  font-family: sans-serif;
+  text-align: center;
+}
+.input-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+.input-section input {
+  width: 300px;
+  padding: 0.5rem;
+}
+.input-section button {
+  padding: 0.5rem 1rem;
+}
+.note-list {
+  list-style: none;
+  padding: 0;
+}
+.note-list li {
+  background: #f9f9f9;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
