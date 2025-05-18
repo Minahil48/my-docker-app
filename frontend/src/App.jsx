@@ -2,27 +2,40 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = 'http://localhost:3000/notes';
+// Use backend service name 'backend' in docker-compose network, or localhost for local dev
+const API_URL = 'http://backend:3000/notes';
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
 
   const fetchNotes = async () => {
-    const res = await axios.get(API_URL);
-    setNotes(res.data);
+    try {
+      const res = await axios.get(API_URL);
+      setNotes(res.data);
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+    }
   };
 
   const addNote = async () => {
     if (!newNote.trim()) return;
-    await axios.post(API_URL, { content: newNote });
-    setNewNote('');
-    fetchNotes();
+    try {
+      await axios.post(API_URL, { content: newNote });
+      setNewNote('');
+      fetchNotes();
+    } catch (error) {
+      console.error('Error adding note:', error);
+    }
   };
 
   const deleteNote = async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
-    fetchNotes();
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      fetchNotes();
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
   };
 
   useEffect(() => {

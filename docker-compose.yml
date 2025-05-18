@@ -1,28 +1,30 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  backend:
-    image: minahil48/note-app-backend
+  mongo:
+    image: mongo
     ports:
-      - "3000:3000"
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - 3000:3000
     depends_on:
       - mongo
     environment:
       - MONGO_URL=mongodb://mongo:27017/notes
 
   frontend:
-    image: minahil48/note-app-frontend
+    build:
+      context: ./frontend
     ports:
-      - "5173:5173"
+      - 8080:5173
     depends_on:
       - backend
-
-  mongo:
-    image: mongo
-    volumes:
-      - mongo-data:/data/db
-    ports:
-      - "27017:27017"
 
 volumes:
   mongo-data:
